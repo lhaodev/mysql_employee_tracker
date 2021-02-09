@@ -31,19 +31,19 @@ CREATE TABLE role (
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("John", "Doe", 1, null);
+VALUES ("John", "Doe", 1, 4);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Mike", "Chan", 2, null);
+VALUES ("Mike", "Chan", 2, 3);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Ashley", "Rodriguez", 3, null);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Kevin", "Tupik", 4, null);
+VALUES ("Kevin", "Tupik", 4, 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Malia", "Brown", 5, null);
+VALUES ("Malia", "Brown", 5, 6);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Sarah", "Lourd", 6, null);
+VALUES ("Sarah", "Lourd", 6, 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES  ("Tom", "Allen", 7, null);
+VALUES  ("Tom", "Allen", 7, 3);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES  ("Tammer", "Galal", 8, null);
 

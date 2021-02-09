@@ -65,7 +65,7 @@ const start = () => {
                     break;
 
                 case "Update Employee Roles":
-                    addRole();
+                    updateRole();
                     break;
 
                 case 'Exit':
@@ -84,7 +84,7 @@ const start = () => {
 const viewEmployees = () => {
 
     const query =
-        'SELECT * FROM employee';
+        'SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name as deparment, role.salary, CONCAT (manager.first_name, " ", manager.last_name) as manager from employee LEFT JOIN role ON role.id = employee.role_id LEFT JOIN department ON department.id = role.department_id LEFT JOIN employee manager ON manager.id = employee.manager_id';
     connection.query(query, (err, res) => {
         console.table(res)
         if (err) throw err;;
@@ -119,5 +119,132 @@ const viewRoles = () => {
     });
 
 };
+
+const addEmployee = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'firstName',
+                type: 'input',
+                message: "What's the employee's first name?",
+                // validate(value) {
+                //     if (isNaN(value) === false) {
+                //         return true;
+                //     }
+                //     return false;
+                // },
+            },
+            {
+                name: 'lastName',
+                type: 'input',
+                message: "What's the employee's last name?",
+                // validate(value) {
+                //     if (isNaN(value) === false) {
+                //         return true;
+                //     }
+                //     return false;
+                // },
+            },
+            {
+                name: 'role',
+                type: "input",
+                message: "What's the employee's title? (role_id)",
+            },
+            {
+                name: 'manager',
+                type: "input",
+                message: "Who's the employee's manager? (employee_id) ",
+            }
+        ])
+        .then((answer) => {
+            // console.log(answer.firstName);
+            connection.query(
+                'INSERT INTO employee SET ?',
+                {
+                    first_name: answer.firstName,
+                    last_name: answer.lastName,
+                    role_id: answer.role,
+                    manager_id: answer.manager,
+                },
+                (err, res) => {
+                    console.log(answer.firstName + " " + answer.lastName + " is added to the employee list.")
+                    if (err) throw err;
+                    viewEmployees();
+                    start();
+                }
+            )
+        }
+        );
+};
+
+const addDepartment = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'name',
+                type: 'input',
+                message: "What's the new department you want to add?",
+                // validate(value) {
+                //     if (isNaN(value) === false) {
+                //         return true;
+                //     }
+                //     return false;
+                // },
+            }
+        ])
+        .then((answer) => {
+            // console.log(answer.firstName);
+            connection.query(
+                'INSERT INTO department SET ?',
+                {
+                    name: answer.name,
+                },
+                (err, res) => {
+                    console.log(answer.name + " is added to the department list.")
+                    if (err) throw err;
+                    viewDepartments();
+                    start();
+                }
+            )
+        }
+        );
+};
+
+
+
+const addRole = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'name',
+                type: 'input',
+                message: "What's the new role you want to add?",
+                // validate(value) {
+                //     if (isNaN(value) === false) {
+                //         return true;
+                //     }
+                //     return false;
+                // },
+            }
+        ])
+        .then((answer) => {
+            // console.log(answer.firstName);
+            connection.query(
+                'INSERT INTO role SET ?',
+                {
+                    name: answer.name,
+                },
+                (err, res) => {
+                    console.log(answer.name + " is added to the role list.")
+                    if (err) throw err;
+                    viewRoles();
+                    start();
+                }
+            )
+        }
+        );
+};
+
+
 
 
