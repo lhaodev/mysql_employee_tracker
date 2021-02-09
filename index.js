@@ -35,7 +35,7 @@ const start = () => {
                 "Add Departments",
                 "Add Roles",
                 "Update Employee Roles",
-                "exit"
+                "Exit"
             ],
         })
         .then((answer) => {
@@ -78,3 +78,46 @@ const start = () => {
             }
         });
 };
+
+
+
+const viewEmployees = () => {
+
+    const query =
+        'SELECT * FROM employee';
+    connection.query(query, (err, res) => {
+        console.table(res)
+        if (err) throw err;;
+        start();
+    });
+
+};
+
+
+
+const viewDepartments = () => {
+
+    const query =
+        'SELECT * FROM department';
+    connection.query(query, (err, res) => {
+        console.table(res)
+        if (err) throw err;;
+        start();
+    });
+
+};
+
+
+const viewRoles = () => {
+
+    const query =
+        'SELECT * FROM role';
+    connection.query(query, (err, res) => {
+        console.table(res)
+        if (err) throw err;;
+        start();
+    });
+
+};
+
+
