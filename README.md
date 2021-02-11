@@ -71,3 +71,4 @@ So that I can organize and plan my business
 
 ## Ackowledgement:
 Shout out to the tutor Pendergrass John with the function of update employee roles.
+Insipred by https://github.com/arjunsingh1027/employee-tracker on how to generate rawlist for roles and employee names. 
